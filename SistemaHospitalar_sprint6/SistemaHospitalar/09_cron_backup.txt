@@ -1,0 +1,18 @@
+# Agendamento do backup diário do PostgreSQL (Sprint 6)
+#
+# Formato cron: minuto hora dia-do-mês mês dia-da-semana
+#   0 2 * * *  ->  todos os dias às 02:00
+#
+# Instalação: execute `crontab -e` e cole a linha abaixo, trocando os caminhos.
+# Confira com:  crontab -l
+#
+# As variáveis (PGDATABASE, PGUSER, PGHOST, PGPORT, BACKUP_DIR) ficam em um arquivo
+# fora do repositório, com permissão 600. Exemplo de ~/.hospitalar_backup.env:
+#   PGDATABASE=hospitalar
+#   PGUSER=usuario_backup
+#   BACKUP_DIR=/var/backups/hospitalar
+# A senha NÃO vai neste arquivo: use ~/.pgpass (permissão 600).
+#
+# O cron roda com um PATH mínimo; se o pg_dump não for encontrado, acrescente
+# o diretório dos binários do PostgreSQL ao PATH dentro do bash -c.
+0 2 * * * /bin/bash -c 'set -a; . "$HOME/.hospitalar_backup.env"; set +a; /caminho/absoluto/08_backup.sh' >> "$HOME/backup-hospitalar.log" 2>&1
