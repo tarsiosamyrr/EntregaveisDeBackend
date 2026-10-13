@@ -1,0 +1,16 @@
+CREATE INDEX IF NOT EXISTS idx_modelo_ia_usuario ON modelo_ia (id_usuario);
+CREATE INDEX IF NOT EXISTS idx_dataset_modelo ON dataset (id_modelo);
+CREATE INDEX IF NOT EXISTS idx_treinamento_modelo_status_data ON treinamento (id_modelo, status, data_inicio DESC);
+CREATE INDEX IF NOT EXISTS idx_metrica_treinamento ON metrica (id_treinamento);
+CREATE INDEX IF NOT EXISTS idx_predicao_modelo_data ON predicao (id_modelo, data_hora DESC);
+CREATE INDEX IF NOT EXISTS idx_feedback_usuario_data ON feedback (id_usuario, data_feedback DESC);
+CREATE INDEX IF NOT EXISTS idx_feedback_predicao ON feedback (id_predicao);
+CREATE INDEX IF NOT EXISTS idx_permissao_usuario_modelo ON permissao (id_usuario, id_modelo);
+ANALYZE usuario;
+ANALYZE modelo_ia;
+ANALYZE dataset;
+ANALYZE treinamento;
+ANALYZE metrica;
+ANALYZE predicao;
+ANALYZE feedback;
+ANALYZE permissao;
